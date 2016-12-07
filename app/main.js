@@ -19,7 +19,9 @@ app.on('ready', () => {
       console.log('name=' + value)
     })
 
-  db.put('student', 'Madison');
-  db.get('student', (err, value) => {console.log(value)});
+  db.put('journal', [{body: 'alkasdflkasjdf', createdAt: Date.now(), noteID:1234}, {body: 'rararar', createdAt: Date.now(), noteID:9999}]);
+
+  db.get('journal', (err, value) => {console.log(value[1])});
+  // db.get(journal[1], (err, value) => {console.log(value)});
   })
 });
