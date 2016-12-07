@@ -5,7 +5,8 @@
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "electron-rebuild"
   },
   "keywords": [],
   "author": "Casey Metz and Madison Kerndt",
@@ -14,6 +15,8 @@
     "babel-preset-electron": "^0.37.8",
     "babel-preset-react": "^6.16.0",
     "electron-prebuilt-compile": "^1.4.10",
+    "electron-rebuild": "^1.4.0",
+    "level": "^1.5.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   }
