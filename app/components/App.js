@@ -5,14 +5,6 @@ import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
 
 export default class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      
-    };
-  }
-
-
   render(){
     return(
       <div className='main-wrapper'>
