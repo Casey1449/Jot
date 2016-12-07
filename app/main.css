@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: menu;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.main-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.notebook-list {
+  flex-grow: 0.5;
+  background-color: blanchedalmond;
+  padding: 30px;
+}
+
+.notes-area {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  flex-grow: 5;
+  align-items: center;
+  align-content: flex-start;
+}
+
+textarea {
+  font-size: 14pt;
+  border: none;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+button {
+  font-size: 14pt;
+  font: menu;
+  border-radius: 0;
+  height: 50px;
+  width: 150px;
+  margin: 30px;
+}
