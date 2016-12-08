@@ -12,6 +12,11 @@ h1 {
   margin: 0;
 }
 
+li {
+  border: 1px solid blanchedalmond;
+  list-style: none;
+}
+
 .main-wrapper {
   display: flex;
   width: 100%;
