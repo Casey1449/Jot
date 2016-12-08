@@ -13,6 +13,7 @@ export default (props) => {
         />
       <button onClick={ props.saveNote }>Save note</button>
       <button onClick={ props.destroyNote }>Delete note</button>
+      <button onClick={ props.startNewNote }>Add new note</button>
 
     </section>
   )

@@ -43,8 +43,7 @@ export default class App extends React.Component {
     const currentNote = this.state.selectedNote;
     db.del(currentNote.id);
     this.loadNotes();
-    this.setState({ selectedNote: null });
-    this.setState({ noteContent: '' });
+    this.startNewNote();
   }
 
   setNote(e){
@@ -54,6 +53,11 @@ export default class App extends React.Component {
   viewNote(n){
     this.setState({ selectedNote: n });
     this.setState({ noteContent: n.body });
+  }
+
+  startNewNote(){
+    this.setState({ selectedNote: null });
+    this.setState({ noteContent: '' });
   }
 
   render(){
@@ -67,7 +71,8 @@ export default class App extends React.Component {
         <NotesArea saveNote={ () => this.saveNote() }
                   destroyNote={ () => this.destroyNote() }
                   setNote={ (e) => this.setNote(e) }
-                  content={ this.state.noteContent }/>
+                  content={ this.state.noteContent }
+                  startNewNote = { () => this.startNewNote() }/>
       </div>
     );
   }
