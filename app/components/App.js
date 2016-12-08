@@ -21,6 +21,7 @@ export default class App extends React.Component {
   }
 
   loadNotes(){
+    this.setState({notes: []})
     db.createValueStream()
     .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
   }
@@ -35,6 +36,7 @@ export default class App extends React.Component {
       currentNote.lastModified = Date.now();
       db.put(currentNote.id, currentNote);
     }
+    this.loadNotes();
   }
 
   setNote(e){

@@ -7,7 +7,7 @@ export default (props) => {
     <section className='note-log'>
       <ul>
         { props.notes ? props.notes.sort((a, b) => b.lastModified - a.lastModified).map(n =>
-          <li onClick={() => props.viewNote(n) }>
+          <li key={n.id} onClick={() => props.viewNote(n) }>
             <p>{ n.body }</p>
             { moment(n.lastModified).format('MMM D YYYY, h:mm a') }
           </li> ) :
