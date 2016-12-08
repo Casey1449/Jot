@@ -60,10 +60,16 @@ export default class App extends React.Component {
     this.setState({ noteContent: '' });
   }
 
+  addNotebook() {
+    console.log('working');
+  }
+
   render(){
     return(
       <div className='main-wrapper'>
-        <NotebookList />
+        <NotebookList
+          addNotebook = {() => this.addNotebook() }
+        />
         <NoteLog
           notes = { this.state.notes }
           viewNote ={(n) => this.viewNote(n) }
