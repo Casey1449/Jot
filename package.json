@@ -5,7 +5,7 @@
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/test.js",
     "postinstall": "electron-rebuild"
   },
   "keywords": [],
@@ -21,5 +21,12 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "shortid": "^2.2.6"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "chai-jquery": "^2.0.0",
+    "mocha": "^3.2.0",
+    "spectron": "^3.4.0"
   }
 }
