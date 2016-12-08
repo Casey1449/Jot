@@ -11,7 +11,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       notes: [],
-      selectedNote: ''
+      selectedNote: null,
       noteContent: ''
     };
   }
@@ -26,29 +26,37 @@ export default class App extends React.Component {
   }
 
   saveNote(){
-    console.log(this.state.noteContent);
-    let note = new Note(this.state.noteContent);
-    db.put(note.id, note, (note) => this.setState({ notes: this.state.notes.concat(note)}));
+    const currentNote = this.state.selectedNote;
+    if(!currentNote) {
+      let note = new Note(this.state.noteContent);
+      db.put(note.id, note);
+    } else {
+      currentNote.body = this.state.noteContent;
+      currentNote.lastModified = Date.now();
+      db.put(currentNote.id, currentNote);
+    }
   }
 
   setNote(e){
     this.setState({ noteContent: e.target.value });
   }
 
+  viewNote(n){
+    this.setState({ selectedNote: n });
+    this.setState({ noteContent: n.body });
+  }
 
   render(){
-    console.log('rendering')
     return(
       <div className='main-wrapper'>
         <NotebookList />
-        <NoteLog notes = { this.state.notes } />
-<<<<<<< HEAD
-        {this.state.selectedNote ? <ReadView /> : <NotesArea />}
-=======
+        <NoteLog
+          notes = { this.state.notes }
+          viewNote ={(n) => this.viewNote(n) }
+        />
         <NotesArea saveNote={ () => this.saveNote() }
-                  setNote={ (e) => this.setNote(e) }/>
-        { this.state.notes.body }
->>>>>>> master
+                  setNote={ (e) => this.setNote(e) }
+                  content={ this.state.noteContent }/>
       </div>
     );
   }
