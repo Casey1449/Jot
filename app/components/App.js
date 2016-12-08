@@ -10,7 +10,8 @@ export default class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      notes: []
+      notes: [],
+      selectedNote: ''
     };
   }
 
@@ -28,8 +29,7 @@ export default class App extends React.Component {
       <div className='main-wrapper'>
         <NotebookList />
         <NoteLog notes = { this.state.notes } />
-        <NotesArea />
-        { this.state.notes.body }
+        {this.state.selectedNote ? <ReadView /> : <NotesArea />}
       </div>
     );
   }
