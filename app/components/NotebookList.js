@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default (props) => {
+  let formShowing = false;
   return (
     <section className='notebook-list'>
       <h1> Notebooks </h1>
@@ -9,6 +10,7 @@ export default (props) => {
         <li>Notebook2</li>
         <li>Notebook3</li>
       </ul>
+      { formShowing ? <section><input placeholder='add notebook' /><button>Create Notebook</button></section> : <button onClick={() => {!formShowing;} }>Add Notebook</button> }
     </section>
   )
 }
