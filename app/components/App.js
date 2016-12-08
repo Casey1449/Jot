@@ -11,6 +11,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       notes: [],
+      selectedNote: ''
       noteContent: ''
     };
   }
@@ -41,9 +42,13 @@ export default class App extends React.Component {
       <div className='main-wrapper'>
         <NotebookList />
         <NoteLog notes = { this.state.notes } />
+<<<<<<< HEAD
+        {this.state.selectedNote ? <ReadView /> : <NotesArea />}
+=======
         <NotesArea saveNote={ () => this.saveNote() }
                   setNote={ (e) => this.setNote(e) }/>
         { this.state.notes.body }
+>>>>>>> master
       </div>
     );
   }
