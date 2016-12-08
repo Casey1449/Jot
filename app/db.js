@@ -1,7 +1,8 @@
 const levelup = require('level');
+const shortid = require('shortid');
 
 function Note (body, modified, title) {
-  this.id = 123,
+  this.id = shortid.generate(),
   this.body = body,
   this.title = title || null,
   this.lastModified = modified,
@@ -9,5 +10,5 @@ function Note (body, modified, title) {
 }
 module.exports = [
   Note,
-  levelup('./mydb', {'valueEncoding': 'json'})
+  levelup('./newdb', {'valueEncoding': 'json'})
 ];

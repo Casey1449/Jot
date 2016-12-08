@@ -15,12 +15,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount(){
-    const note = new Note('body');
-    db.put('journal', note, () => {
-      db.get('journal',
-      (err, value) => this.setState({ notes: [ value ] }))
-    });
+    let note = new Note('newnote');
+    db.put(note.id, note, () => {
+      db.createValueStream()
+        .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
+      })
   }
+
 
   render(){
     return(
