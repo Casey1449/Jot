@@ -3,7 +3,6 @@ import React from 'react';
 const moment = require('moment');
 
 export default (props) => {
-  console.log(props);
   return (
     <section className='note-log'>
       <ul>

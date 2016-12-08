@@ -12,24 +12,43 @@ export default class App extends React.Component {
     this.state = {
       notes: [],
       selectedNote: ''
+      noteContent: ''
     };
   }
 
   componentDidMount(){
-    let note = new Note('newnote');
-    db.put(note.id, note, () => {
-      db.createValueStream()
-        .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
-      })
+    this.loadNotes();
+  }
+
+  loadNotes(){
+    db.createValueStream()
+    .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
+  }
+
+  saveNote(){
+    console.log(this.state.noteContent);
+    let note = new Note(this.state.noteContent);
+    db.put(note.id, note, (note) => this.setState({ notes: this.state.notes.concat(note)}));
+  }
+
+  setNote(e){
+    this.setState({ noteContent: e.target.value });
   }
 
 
   render(){
+    console.log('rendering')
     return(
       <div className='main-wrapper'>
         <NotebookList />
         <NoteLog notes = { this.state.notes } />
+<<<<<<< HEAD
         {this.state.selectedNote ? <ReadView /> : <NotesArea />}
+=======
+        <NotesArea saveNote={ () => this.saveNote() }
+                  setNote={ (e) => this.setNote(e) }/>
+        { this.state.notes.body }
+>>>>>>> master
       </div>
     );
   }
