@@ -18,7 +18,7 @@ export default class App extends React.Component {
     const note = new Note('body');
     db.put('journal', note, () => {
       db.get('journal',
-      (err, value) => this.setState({ notes: value }))
+      (err, value) => this.setState({ notes: [ value ] }))
     });
   }
 
@@ -26,7 +26,7 @@ export default class App extends React.Component {
     return(
       <div className='main-wrapper'>
         <NotebookList />
-        <NoteLog />
+        <NoteLog notes = { this.state.notes } />
         <NotesArea />
         { this.state.notes.body }
       </div>
