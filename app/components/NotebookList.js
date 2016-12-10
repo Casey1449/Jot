@@ -10,7 +10,7 @@ export default (props) => {
         <li>Notebook2</li>
         <li>Notebook3</li>
       </ul>
-      { formShowing ? <section><input placeholder='add notebook' /><button className='create-notebook-button'>Create Notebook</button></section> : <button onClick={() => {!formShowing;} }>Add Notebook</button> }
+      { formShowing ? <section><input placeholder='add notebook' /><button className='create-notebook-button'>Create Notebook</button></section> : <button className='add-notebook-button' onClick={() => {!formShowing;} }>Add Notebook</button> }
     </section>
   )
 }

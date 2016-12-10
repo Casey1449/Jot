@@ -15,19 +15,21 @@ global.before(function () {
 });
 
 describe('App starts and has correct initial appearance', function () {
-  var app = null
-  beforeEach(function () {
+
+  let app = null;
+
+  before(function () {
       app = new Application({ path: electronPath, args: [appPath]});
       return app.start();
   });
 
-  afterEach(function () {
-      return app.stop();
+  after(function () {
+    return app.stop();
   });
 
   it('opens a window', function () {
-    return app.client.waitUntilWindowLoaded()
-      .getWindowCount().should.eventually.equal(1);
+      return app.client.waitUntilWindowLoaded()
+        .getWindowCount().should.eventually.equal(1);
   });
 
   it('tests the title', function () {
@@ -36,20 +38,59 @@ describe('App starts and has correct initial appearance', function () {
   });
 
   it('displays an "add notebook" button', function (){
-    return app.client.getText('#add-notebook-button').then(function (buttonText) {
-    assert(buttonText === 'Create Notebook')
+    return app.client.getText('.add-notebook-button').then(function (buttonText) {
+    assert(buttonText === 'Add Notebook')
     })
   });
 
-  xit('displays a "save note" button', function (){
-    return app.client.getText('#save-markdown').then(function (buttonText) {
-    assert(buttonText === 'Save File')
+  it('displays a "save note" button', function (){
+    return app.client.getText('.save-note-button').then(function (buttonText) {
+    assert(buttonText === 'Save note')
     })
   });
 
-  xit('displays a "delete note" button', function (){
-    return app.client.getText('#save-markdown').then(function (buttonText) {
-    assert(buttonText === 'Save File')
+  it('displays a "delete note" button', function (){
+    return app.client.getText('.delete-note-button').then(function (buttonText) {
+    assert(buttonText === 'Delete note')
     })
+  });
+
+  //has a text field
+  //shows the notes log
+});
+
+describe('App allows user to create and save notes', function () {
+
+  let app = null;
+
+  before(function () {
+      app = new Application({ path: electronPath, args: [appPath]});
+      return app.start();
+  });
+
+  after(function () {
+    return app.stop();
+  });
+
+  it('', function () {
+
+  });
+});
+
+describe('App allows user to read previous notes', function () {
+
+  let app = null;
+
+  before(function () {
+      app = new Application({ path: electronPath, args: [appPath]});
+      return app.start();
+  });
+
+  after(function () {
+    return app.stop();
+  });
+
+  it('', function () {
+
   });
 });
