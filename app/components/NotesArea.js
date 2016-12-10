@@ -6,6 +6,7 @@ export default (props) => {
     <section className='notes-area'>
 
       <textarea
+        onBlur={ props.saveNote }
         className='note-text'
         value={ props.content }
         onChange={ (e) => props.setNote(e) }
@@ -26,7 +27,6 @@ export default (props) => {
         onClick={ props.startNewNote }>
         Add new note
       </button>
-
     </section>
   )
 }
