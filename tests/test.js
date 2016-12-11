@@ -5,6 +5,8 @@ const path = require('path')
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
+const [ Note ] = require('../db');
+
 var electronPath = path.join(__dirname, '..', 'node_modules', '.bin', 'electron');
 
 var appPath = path.join(__dirname, '..');
@@ -95,6 +97,7 @@ describe('App allows user to read previous notes', function () {
   });
 });
 
+
 describe('Note update', function () {
 
   let app = null;
@@ -105,6 +108,7 @@ describe('Note update', function () {
   });
 
   after(function() {
+
       return app.stop();
   });
 
