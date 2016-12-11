@@ -1,4 +1,5 @@
 import React from 'react';
+import shortid from 'shortid'
 
 export default class NotebookList extends React.Component {
   constructor(props){
@@ -23,9 +24,8 @@ export default class NotebookList extends React.Component {
       <section className='notebook-list'>
         <h1> Notebooks </h1>
         <ul>
-          <li>Notebook1</li>
-          <li>Notebook2</li>
-          <li>Notebook3</li>
+        { this.props.notebooks ? this.props.notebooks.map(n => <li
+          key={shortid.generate()}>{n}</li>) : 'no notebooks' }
         </ul>
         { this.state.formShowing ?
           <section>

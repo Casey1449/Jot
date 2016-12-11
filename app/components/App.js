@@ -17,23 +17,47 @@ export default class App extends React.Component {
     };
   }
 
+  componentWillMount(){
+    this.loadBookshelf();
+  }
+
   componentDidMount(){
     this.loadNotes();
+  }
+
+  componentDidUpdate(){
+    if(this.state.bookShelf.length > 0){
+    db.put('bookShelf', this.state.bookShelf);
+    };
+  }
+
+  loadBookshelf(){
+    db.get('bookShelf', (_, userNotebooks) => {
+      if(userNotebooks){ this.setState({ bookShelf: [...userNotebooks] }); }
+    });
   }
 
   loadNotes(){
     this.setState({notes: []})
     db.createValueStream()
-    .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
+    .on('data', (data) => {
+      if(!Array.isArray(data)){
+        console.log(data);
+        this.setState({ notes: this.state.notes.concat(data) })
+      }
+    })
   }
 
   saveNote(){
     const currentNote = this.state.selectedNote;
+    const content = this.state.noteContent;
+    if(!content) { return; }
     if(!currentNote) {
-      let note = new Note(this.state.noteContent);
+      let note = new Note(content);
+      this.setState({ selectedNote: note });
       db.put(note.id, note);
     } else {
-      currentNote.body = this.state.noteContent;
+      currentNote.body = content;
       currentNote.lastModified = Date.now();
       db.put(currentNote.id, currentNote);
     }
@@ -66,14 +90,12 @@ export default class App extends React.Component {
     this.setState({ bookShelf:  notebooks.concat(notebook) });
   }
 
-  componentDidUpdate(){
-    db.put('bookShelf', this.state.bookShelf);
-  }
 
   render(){
     return(
       <div className='main-wrapper'>
         <NotebookList
+          notebooks = { this.state.bookShelf }
           addNotebook = {(n) => this.addNotebook(n) }
         />
         <NoteLog
