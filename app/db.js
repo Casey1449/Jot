@@ -1,9 +1,10 @@
 const levelup = require('level');
 const shortid = require('shortid');
 
-function Note (body, modified=Date.now(), title) {
+function Note (body, notebook, modified=Date.now(), title) {
   this.id = shortid.generate(),
   this.body = body,
+  this.notebook = notebook,
   this.title = title || null,
   this.lastModified = modified,
   this.timeStamp = Date.now()
