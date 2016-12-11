@@ -96,6 +96,7 @@ export default class App extends React.Component {
 
   setCurrentNotebook(e){
     this.setState({ selectedNotebook: e.target.innerHTML });
+    this.startNewNote();
   }
 
   render(){
