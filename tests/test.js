@@ -5,8 +5,6 @@ const path = require('path')
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
-const [ Note ] = require('../db');
-
 var electronPath = path.join(__dirname, '..', 'node_modules', '.bin', 'electron');
 
 var appPath = path.join(__dirname, '..');
@@ -126,10 +124,10 @@ describe('Note update', function () {
     });
   });
 
-  it('should update date last modified on click of save', () => {
+  xit('should update date last modified on click of save', () => {
     let testNote = new Note('content');
     const id = note.id;
-    db.put(id, testNote);
+    // db.put(id, testNote);
   });
 
   xit('should reorder list items with most recently edited at the top', () => {
