@@ -69,8 +69,8 @@ export default class App extends React.Component {
 
   destroyNote(){
     const currentNote = this.state.selectedNote;
+    this.setState({ notes: this.state.notes.filter(n => n.id !==currentNote.id)});
     db.del(currentNote.id);
-    this.loadNotes();
     this.startNewNote();
   }
 
