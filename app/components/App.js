@@ -30,6 +30,7 @@ export default class App extends React.Component {
     if(this.state.bookShelf.length > 0){
     db.put('bookShelf', this.state.bookShelf);
     };
+    this.saveNote()
   }
 
   loadBookshelf(){
@@ -56,13 +57,14 @@ export default class App extends React.Component {
     if(!currentNote) {
       let note = new Note(content, this.state.selectedNotebook);
       this.setState({ selectedNote: note });
+      this.setState({ notes: this.state.notes.concat(note) })
       db.put(note.id, note);
     } else {
       currentNote.body = content;
       currentNote.lastModified = Date.now();
       db.put(currentNote.id, currentNote);
     }
-    this.loadNotes();
+    // this.loadNotes();
   }
 
   destroyNote(){
@@ -74,6 +76,7 @@ export default class App extends React.Component {
 
   setNote(e){
     this.setState({ noteContent: e.target.value });
+    // this.saveNote()
   }
 
   viewNote(n){
