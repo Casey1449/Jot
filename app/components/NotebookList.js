@@ -25,7 +25,9 @@ export default class NotebookList extends React.Component {
         <h1> Notebooks </h1>
         <ul>
         { this.props.notebooks ? this.props.notebooks.map(n => <li
-          key={shortid.generate()}>{n}</li>) : 'no notebooks' }
+          key={shortid.generate()}
+          onClick={(e) => this.props.setCurrentNotebook(e)}
+          >{n}</li>) : 'no notebooks' }
         </ul>
         { this.state.formShowing ?
           <section>

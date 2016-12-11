@@ -12,6 +12,7 @@ export default class App extends React.Component {
     this.state = {
       notes: [],
       selectedNote: null,
+      selectedNotebook: null,
       noteContent: '',
       bookShelf: []
     };
@@ -53,7 +54,7 @@ export default class App extends React.Component {
     const content = this.state.noteContent;
     if(!content) { return; }
     if(!currentNote) {
-      let note = new Note(content);
+      let note = new Note(content, this.state.selectedNotebook);
       this.setState({ selectedNote: note });
       db.put(note.id, note);
     } else {
@@ -90,6 +91,9 @@ export default class App extends React.Component {
     this.setState({ bookShelf:  notebooks.concat(notebook) });
   }
 
+  setCurrentNotebook(e){
+    this.setState({ selectedNotebook: e.target.innerHTML });
+  }
 
   render(){
     return(
@@ -97,8 +101,10 @@ export default class App extends React.Component {
         <NotebookList
           notebooks = { this.state.bookShelf }
           addNotebook = {(n) => this.addNotebook(n) }
+          setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
         />
         <NoteLog
+          selectedNotebook = {this.state.selectedNotebook}
           notes = { this.state.notes }
           viewNote ={(n) => this.viewNote(n) }
         />
