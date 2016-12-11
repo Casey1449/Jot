@@ -10,8 +10,8 @@ let mainWindow = null;
 
 app.on('ready', function() {
  mainWindow = new BrowserWindow({
-   width: 300,
-   height: 300
+   width: 700,
+   height: 700
  });
 
  mainWindow.loadURL(`file://${__dirname}/index.html`)

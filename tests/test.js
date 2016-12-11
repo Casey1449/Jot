@@ -16,29 +16,15 @@ global.before(function () {
     chai.use(chaiAsPromised);
 });
 
-<<<<<<< HEAD
-describe('App starts and has correct title and buttons', function () {
-  beforeEach(() => {
-=======
 describe('App starts and has correct initial appearance', function () {
 
   let app = null;
 
   before(function () {
->>>>>>> master
       app = new Application({ path: electronPath, args: [appPath]});
       return app.start();
   });
 
-<<<<<<< HEAD
-  afterEach(() => {
-      return app.stop();
-  });
-
-  it('opens a window', () => {
-    return app.client.waitUntilWindowLoaded()
-      .getWindowCount().should.eventually.equal(1);
-=======
   after(function () {
     return app.stop();
   });
@@ -108,7 +94,6 @@ describe('App allows user to read previous notes', function () {
 
   it('', function () {
 
->>>>>>> master
   });
 });
 
