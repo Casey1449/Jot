@@ -31,7 +31,7 @@ describe('App starts and has correct initial appearance', function () {
 
   it('opens a window', function () {
       return app.client.waitUntilWindowLoaded()
-        .getWindowCount().should.eventually.equal(1);
+        .getWindowCount().should.eventually.equal(2);
   });
 
   it('tests the title', function () {
@@ -99,12 +99,16 @@ describe('App allows user to read previous notes', function () {
 
 
 describe('Note update', function () {
-  beforeEach(() => {
+
+  let app = null;
+
+  before(function() {
     app = new Application({ path: electronPath, args: [appPath]});
     return app.start();
   });
 
-  afterEach(() => {
+  after(function() {
+
       return app.stop();
   });
 
@@ -116,7 +120,7 @@ describe('Note update', function () {
   });
 
   it('should have button to save edited contents', () => {
-    return app.client.waitUntilWindowLoaded().getText('.note-save-button')
+    return app.client.waitUntilWindowLoaded().getText('.save-note-button')
       .then((buttonText) => {
         assert(buttonText === 'Save note');
     });
@@ -138,13 +142,13 @@ describe('Note update', function () {
 });
 
 describe('Note delete', function () {
-  // var app = null
-  beforeEach(() => {
+  var app = null
+  before(function() {
       app = new Application({ path: electronPath, args: [appPath]});
       return app.start();
   });
 
-  afterEach(() => {
+  after(function() {
       return app.stop();
   });
 
