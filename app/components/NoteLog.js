@@ -6,7 +6,7 @@ export default (props) => {
 
   let notes = []
 
-  props.selectedNotebook ?
+  props.selectedNotebook !== 'all' ?
     notes = props.notes.filter(n => n.notebook === props.selectedNotebook) : notes = props.notes;
 
   return (

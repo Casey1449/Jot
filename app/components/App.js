@@ -12,9 +12,9 @@ export default class App extends React.Component {
     this.state = {
       notes: [],
       selectedNote: null,
-      selectedNotebook: null,
+      selectedNotebook: 'all',
       noteContent: '',
-      bookShelf: []
+      bookShelf: ['all']
     };
   }
 
