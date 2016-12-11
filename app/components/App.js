@@ -12,42 +12,71 @@ export default class App extends React.Component {
     this.state = {
       notes: [],
       selectedNote: null,
-      noteContent: ''
+      selectedNotebook: null,
+      noteContent: '',
+      bookShelf: []
     };
+  }
+
+  componentWillMount(){
+    this.loadBookshelf();
   }
 
   componentDidMount(){
     this.loadNotes();
   }
 
+  componentDidUpdate(){
+    if(this.state.bookShelf.length > 0){
+    db.put('bookShelf', this.state.bookShelf);
+    };
+    this.saveNote()
+  }
+
+  loadBookshelf(){
+    db.get('bookShelf', (_, userNotebooks) => {
+      if(userNotebooks){ this.setState({ bookShelf: [...userNotebooks] }); }
+    });
+  }
+
   loadNotes(){
     this.setState({notes: []})
     db.createValueStream()
-    .on('data', (data) => this.setState({ notes: this.state.notes.concat(data) }))
+    .on('data', (data) => {
+      if(!Array.isArray(data)){
+        console.log(data);
+        this.setState({ notes: this.state.notes.concat(data) })
+      }
+    })
   }
 
   saveNote(){
     const currentNote = this.state.selectedNote;
+    const content = this.state.noteContent;
+    if(!content) { return; }
     if(!currentNote) {
-      let note = new Note(this.state.noteContent);
+      let note = new Note(content, this.state.selectedNotebook);
+      this.setState({ selectedNote: note });
+      this.setState({ notes: this.state.notes.concat(note) })
       db.put(note.id, note);
     } else {
-      currentNote.body = this.state.noteContent;
+      currentNote.body = content;
       currentNote.lastModified = Date.now();
       db.put(currentNote.id, currentNote);
     }
-    this.loadNotes();
+    // this.loadNotes();
   }
 
   destroyNote(){
     const currentNote = this.state.selectedNote;
+    this.setState({ notes: this.state.notes.filter(n => n.id !==currentNote.id)});
     db.del(currentNote.id);
-    this.loadNotes();
     this.startNewNote();
   }
 
   setNote(e){
     this.setState({ noteContent: e.target.value });
+    // this.saveNote()
   }
 
   viewNote(n){
@@ -60,17 +89,25 @@ export default class App extends React.Component {
     this.setState({ noteContent: '' });
   }
 
-  addNotebook() {
-    console.log('working');
+  addNotebook(notebook){
+    const notebooks = this.state.bookShelf;
+    this.setState({ bookShelf:  notebooks.concat(notebook) });
+  }
+
+  setCurrentNotebook(e){
+    this.setState({ selectedNotebook: e.target.innerHTML });
   }
 
   render(){
     return(
       <div className='main-wrapper'>
         <NotebookList
-          addNotebook = {() => this.addNotebook() }
+          notebooks = { this.state.bookShelf }
+          addNotebook = {(n) => this.addNotebook(n) }
+          setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
         />
         <NoteLog
+          selectedNotebook = {this.state.selectedNotebook}
           notes = { this.state.notes }
           viewNote ={(n) => this.viewNote(n) }
         />

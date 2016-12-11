@@ -14,7 +14,6 @@ export default (props) => {
       <button className='note-save-button' onClick={ props.saveNote }>Save note</button>
       <button onClick={ props.destroyNote }>Delete note</button>
       <button onClick={ props.startNewNote }>Add new note</button>
-
     </section>
   )
 }
