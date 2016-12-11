@@ -132,23 +132,27 @@ describe('Note update', function () {
     });
   });
 
-  xit('should update date last modified on click of save', function() {
-    let testNote = new Note('content');
+  xit('should update the proporty, date last modified on click of save', function() {
+    app.client.click('.save-note-button');
+    let testNote = new Note('content', _, );
     const id = note.id;
     // db.put(id, testNote);
   });
 
-  xit('should reorder list items with most recently edited at the top', function() {
-
+  it('should reorder list items with most recently edited at the top', function() {
+    return app.client.waitUntilWindowLoaded().getText('.delete-note-button')
+      .then(function(buttonText) {
+        assert(buttonText === 'Delete note');
+      });
+  });
   });
 
   xit('should save changes to DB', function(){
 
   });
 
-  xit('should save edited changes to render method', function(){
+  xit('should reflect changes within the render method', function(){
 
-  });
 });
 
 describe('Note delete', function () {
@@ -180,6 +184,6 @@ describe('Note delete', function () {
     app.client.click('.save-note-button');
     app.client.click('.delete-note-button');
     return app.client.waitUntilWindowLoaded()
-      expect('foobar').to.have.lengthOf(1);
+      expect('.note-log--note').to.have.lengthOf(1);
     });
 });
