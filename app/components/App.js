@@ -4,7 +4,13 @@ import NotebookList from './NotebookList';
 import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
 
-const [ Note, db ] = require('../db');
+const { Note, devDB, testDB } = require('../db');
+//
+let db = devDB;
+
+if (process.env.NODE_ENV === 'test') {
+  db = testDB;
+}
 
 export default class App extends React.Component {
   constructor(){

@@ -9,7 +9,9 @@ function Note (body, notebook, modified=Date.now(), title) {
   this.lastModified = modified,
   this.timeStamp = Date.now()
 }
-module.exports = [
+
+module.exports = {
   Note,
-  levelup('./mydb', {'valueEncoding': 'json'})
-];
+  devDB: levelup('./devDB', {'valueEncoding': 'json'}),
+  testDB: levelup('./testDB', {'valueEncoding': 'json'})
+};
