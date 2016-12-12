@@ -54,7 +54,7 @@ export default class App extends React.Component {
     if(!currentNote) {
       let note = new Note(content, this.state.selectedNotebook);
       this.setState({ selectedNote: note });
-      this.setState({ notes: this.state.notes.concat(note) })
+      this.setState({ notes: this.state.notes.concat(note) });
       db.put(note.id, note);
     } else {
       currentNote.body = content;
