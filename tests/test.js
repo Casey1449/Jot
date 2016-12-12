@@ -20,7 +20,7 @@ describe('App starts and has correct initial appearance', function () {
 
   before(function () {
       app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
-            return app.start();
+      return app.start();
   });
 
   after(function () {
@@ -43,7 +43,7 @@ describe('App starts and has correct initial appearance', function () {
     });
   });
 
-  it('displays a "save note" button', function (){
+  xit('displays a "save note" button', function (){
     return app.client.getText('.save-note-button').then(function (buttonText) {
       assert(buttonText === 'Save note');
     });
@@ -142,7 +142,7 @@ describe('Note update', function () {
       return app.stop();
   });
 
-  it('should have button to save edited contents', function() {
+  xit('should have button to save edited contents', function() {
     return app.client.waitUntilWindowLoaded().getText('.save-note-button')
       .then(function(buttonText) {
         assert(buttonText === 'Save note');
