@@ -11,11 +11,6 @@ export default (props) => {
         onChange={ (e) => props.setNote(e) }
         placeholder='add your note'
         />
-       <button
-          className='save-note-button'
-          onClick={ props.saveNote }>
-          Save note
-        </button>
         <button
           className='delete-note-button'
           onClick={ props.destroyNote }>

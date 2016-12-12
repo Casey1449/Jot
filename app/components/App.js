@@ -30,7 +30,6 @@ export default class App extends React.Component {
     if(this.state.bookShelf.length > 0){
     db.put('bookShelf', this.state.bookShelf);
     };
-    this.saveNote()
   }
 
   loadBookshelf(){
@@ -44,15 +43,13 @@ export default class App extends React.Component {
     db.createValueStream()
     .on('data', (data) => {
       if(!Array.isArray(data)){
-        console.log(data);
         this.setState({ notes: this.state.notes.concat(data) })
       }
     })
   }
 
-  saveNote(){
+  saveNote(content){
     const currentNote = this.state.selectedNote;
-    const content = this.state.noteContent;
     if(!content) { return; }
     if(!currentNote) {
       let note = new Note(content, this.state.selectedNotebook);
@@ -64,7 +61,6 @@ export default class App extends React.Component {
       currentNote.lastModified = Date.now();
       db.put(currentNote.id, currentNote);
     }
-    // this.loadNotes();
   }
 
   destroyNote(){
@@ -76,7 +72,7 @@ export default class App extends React.Component {
 
   setNote(e){
     this.setState({ noteContent: e.target.value });
-    // this.saveNote()
+    this.saveNote(e.target.value);
   }
 
   viewNote(n){
@@ -108,9 +104,10 @@ export default class App extends React.Component {
           setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
         />
         <NoteLog
-          selectedNotebook = {this.state.selectedNotebook}
+          selectedNotebook = { this.state.selectedNotebook }
+          noteContent = { this.state.noteContent }
           notes = { this.state.notes }
-          viewNote ={(n) => this.viewNote(n) }
+          viewNote ={ (n) => this.viewNote(n) }
         />
         <NotesArea saveNote={ () => this.saveNote() }
                   destroyNote={ () => this.destroyNote() }
