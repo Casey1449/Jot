@@ -12,9 +12,9 @@ export default class App extends React.Component {
     this.state = {
       notes: [],
       selectedNote: null,
-      selectedNotebook: null,
+      selectedNotebook: 'all',
       noteContent: '',
-      bookShelf: []
+      bookShelf: ['all']
     };
   }
 
@@ -96,6 +96,7 @@ export default class App extends React.Component {
 
   setCurrentNotebook(e){
     this.setState({ selectedNotebook: e.target.innerHTML });
+    this.startNewNote();
   }
 
   render(){
