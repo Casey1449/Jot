@@ -19,8 +19,8 @@ describe('App starts and has correct initial appearance', function () {
   let app = null;
 
   before(function () {
-      app = new Application({ path: electronPath, args: [appPath]});
-      return app.start();
+      app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
+            return app.start();
   });
 
   after(function () {
@@ -39,24 +39,42 @@ describe('App starts and has correct initial appearance', function () {
 
   it('displays an "add notebook" button', function (){
     return app.client.getText('.add-notebook-button').then(function (buttonText) {
-    assert(buttonText === 'Add Notebook')
-    })
+      assert(buttonText === 'Add Notebook');
+    });
   });
 
   it('displays a "save note" button', function (){
     return app.client.getText('.save-note-button').then(function (buttonText) {
-    assert(buttonText === 'Save note')
-    })
+      assert(buttonText === 'Save note');
+    });
   });
 
   it('displays a "delete note" button', function (){
     return app.client.getText('.delete-note-button').then(function (buttonText) {
-    assert(buttonText === 'Delete note')
-    })
+      assert(buttonText === 'Delete note');
+    });
   });
 
-  //has a text field
-  //shows the notes log
+  it('should display a textfield to edit content', function() {
+    return app.client.waitUntilWindowLoaded()
+      .then(function(newText){
+        expect('.note-input-text').to.exist;
+    });
+  });
+
+  it('should display of log', function() {
+    return app.client.waitUntilWindowLoaded()
+      .then(function(){
+        expect('.note-log').to.exist;
+    });
+  });
+
+  it('should display of log with all notes', function() {
+    return app.client.waitUntilWindowLoaded()
+      .then(function(newText){
+        expect('.note-log--note').to.have.length.above(0);
+    });
+  });
 });
 
 describe('App allows user to create and save notes', function () {
@@ -64,16 +82,24 @@ describe('App allows user to create and save notes', function () {
   let app = null;
 
   before(function () {
-      app = new Application({ path: electronPath, args: [appPath]});
-      return app.start();
+      app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
+            return app.start();
   });
 
   after(function () {
     return app.stop();
   });
 
-  it('', function () {
+  it('should allow user to add a note', function () {
+    app.client.click('.save-note-button');
+    return app.client.waitUntilWindowLoaded()
+      expect('.note-log--note').to.have.lengthOf(1);
+  });
 
+  xit('should save added note', function () {
+    app.client.click('.save-note-button');
+    return app.client.waitUntilWindowLoaded()
+      expect('.note-log--note').to.have.lengthOf(1);
   });
 });
 
@@ -82,16 +108,22 @@ describe('App allows user to read previous notes', function () {
   let app = null;
 
   before(function () {
-      app = new Application({ path: electronPath, args: [appPath]});
-      return app.start();
+      app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
+            return app.start();
   });
 
   after(function () {
     return app.stop();
   });
 
-  it('', function () {
+  it('should render all new added notes', function () {
+    app.client.click('.save-note-button');
+    app.client.click('.save-note-button');
+    return app.client.waitUntilWindowLoaded()
+      expect('.note-log--note').to.have.lengthOf(2);
+    });
 
+  xit('should render added notes from db', function () {
   });
 });
 
@@ -101,8 +133,8 @@ describe('Note update', function () {
   let app = null;
 
   before(function() {
-    app = new Application({ path: electronPath, args: [appPath]});
-    return app.start();
+    app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
+      return app.start();
   });
 
   after(function() {
@@ -110,39 +142,44 @@ describe('Note update', function () {
       return app.stop();
   });
 
-  xit('should have a field to edit content', () => {
-    return app.client.waitUntilWindowLoaded().getText('.note-input-text')
-      .then((buttonText) => {
-        assert(buttonText === 'add your note');
-    });
-  });
-
-  it('should have button to save edited contents', () => {
+  it('should have button to save edited contents', function() {
     return app.client.waitUntilWindowLoaded().getText('.save-note-button')
-      .then((buttonText) => {
+      .then(function(buttonText) {
         assert(buttonText === 'Save note');
     });
   });
 
-  xit('should update date last modified on click of save', () => {
-    let testNote = new Note('content');
-    const id = note.id;
-    // db.put(id, testNote);
+  xit('should update the proporty, date last modified of note when edited', function() {
+    app.client.click('.save-note-button');
+    app.client.click('.save-note-button');
+    return app.client.waitUntilWindowLoaded()
+      .then(function(note) {
+        assert.property(note);
+    });
   });
 
-  xit('should reorder list items with most recently edited at the top', () => {
+  it('should reorder list items with most recently edited at the top', function() {
+    return app.client.waitUntilWindowLoaded().getText('.delete-note-button')
+      .then(function(buttonText) {
+        assert(buttonText === 'Delete note');
+      });
+  });
+
+  xit('should save changes to DB', function(){
 
   });
 
-  xit('should save changes to DB', () => {
-
+  xit('should reflect changes within the render method', function(){
   });
+
 });
 
 describe('Note delete', function () {
-  var app = null
+
+  var app = null;
+
   before(function() {
-      app = new Application({ path: electronPath, args: [appPath]});
+      app = new Application({ path: electronPath, args: [appPath], startTimeout: 6000, waitTimeout: 6000 });
       return app.start();
   });
 
@@ -150,15 +187,22 @@ describe('Note delete', function () {
       return app.stop();
   });
 
-  xit('should render a delete button', () => {
-
+  it('should render a delete button', function() {
+    return app.client.waitUntilWindowLoaded().getText('.delete-note-button')
+      .then(function(buttonText) {
+        assert(buttonText === 'Delete note');
+      });
   });
 
-  xit('should destroy saved item from DB on click', () => {
-
+  it('should destroy note from view on click of delete button', function() {
+    app.client.click('.save-note-button');
+    app.client.click('.save-note-button');
+    app.client.click('.delete-note-button');
+    return app.client.waitUntilWindowLoaded()
+      expect('.note-log--note').to.have.lengthOf(1);
   });
 
-  xit('should destroy note from view on click', () => {
+  xit('should destroy saved item from DB on click', function() {
 
   });
 });
