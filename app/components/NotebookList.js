@@ -1,5 +1,5 @@
 import React from 'react';
-import shortid from 'shortid'
+import shortid from 'shortid';
 
 export default class NotebookList extends React.Component {
   constructor(props){
@@ -22,27 +22,23 @@ export default class NotebookList extends React.Component {
   render(){
     return (
       <section className='notebook-list'>
-        <h1> Notebooks </h1>
+        <h1>Notebooks</h1>
         <ul>
         { this.props.notebooks ? this.props.notebooks.map(n => <li
           key={shortid.generate()}
-          onClick={(e) => this.props.setCurrentNotebook(e)}
-
-
-
-          className={`notebook-list-notebook ${this.props.currentNotebook && this.props.currentNotebook === n? 'notebook-is-active' : ''}` }
+          onClick={ (e) => this.props.setCurrentNotebook(e) }
+          className={ `notebook-list-notebook ${this.props.currentNotebook && this.props.currentNotebook === n? 'notebook-is-active' : ''}` }
           >{n}</li>) : 'no notebooks' }
         </ul>
-
         { this.state.formShowing ?
           <section className='notebook-create-form'>
             <input
-              onKeyUp={(e) => this.updateNotebookName(e) }
+              onKeyUp={ (e) => this.updateNotebookName(e) }
               className='add-notebook-input'
               placeholder='add notebook' />
             <button
               className='create-notebook-button'
-              onClick={() => {
+              onClick={ () => {
                 this.props.addNotebook(this.state.notebookName);
                 this.toggleForm();
                 }
@@ -51,7 +47,7 @@ export default class NotebookList extends React.Component {
           </section> :
           <section className='notebook-create-form'>
 
-            <button className='create-notebook-button' onClick={() => this.toggleForm() }></button>
+            <button className='create-notebook-button' onClick={ () => this.toggleForm() }></button>
           </section>}
       </section>
     )
