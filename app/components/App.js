@@ -1,11 +1,9 @@
 import React from 'react';
-
 import NotebookList from './NotebookList';
 import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
 
 const { Note, devDB, testDB } = require('../db');
-
 let db = devDB;
 
 if (process.env.NODE_ENV === 'test') {
@@ -35,7 +33,7 @@ export default class App extends React.Component {
   componentDidUpdate(){
     if(this.state.bookShelf.length > 0){
     db.put('bookShelf', this.state.bookShelf);
-    };
+    }
   }
 
   loadBookshelf(){
@@ -45,13 +43,13 @@ export default class App extends React.Component {
   }
 
   loadNotes(){
-    this.setState({notes: []})
+    this.setState({ notes: [] });
     db.createValueStream()
     .on('data', (data) => {
       if(!Array.isArray(data)){
-        this.setState({ notes: this.state.notes.concat(data) })
+        this.setState({ notes: this.state.notes.concat(data) });
       }
-    })
+    });
   }
 
   saveNote(content){
@@ -71,7 +69,7 @@ export default class App extends React.Component {
 
   destroyNote(){
     const currentNote = this.state.selectedNote;
-    this.setState({ notes: this.state.notes.filter(n => n.id !==currentNote.id)});
+    this.setState({ notes: this.state.notes.filter(n =>  n.id !==currentNote.id) });
     db.del(currentNote.id);
     this.startNewNote();
   }

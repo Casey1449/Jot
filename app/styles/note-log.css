@@ -1,41 +1,40 @@
 .note-log-note {
+  position: relative;
   height: 50px;
+  padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 10px;
-  position: relative;
-  cursor: pointer;
   border-bottom: 1px solid rgba(141, 141, 140, .5);
-  text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .note-is-active {
-  background-color: #8D8D8D;
-  width: 140px;
-  height: 45px;
-  padding: 10px;
   position: relative;
+  height: 45px;
+  width: 140px;
+  background-color: #8D8D8D;
+  padding: 10px;
   margin: auto;
-  font-weight: bold;
-  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .note-log-note-body {
   font-family:'Roboto', sans-serif;
   font-weight: 300;
   font-size: 1rem;
-  cursor: pointer;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .note-log-note-date {
+  position: absolute;
+  right: 0;
   font-family:'Roboto', sans-serif;
   font-weight: 100;
   font-size: .7rem;
-  right: 0;
-  position: absolute;
   text-overflow: ellipsis;
 
 }
