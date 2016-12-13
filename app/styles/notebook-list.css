@@ -1,0 +1,65 @@
+.notebook-list-notebook {
+  height: 50px;
+  overflow: hidden;
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid rgba(141, 141, 140, .5);
+  font-family:'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+h1 {
+  font-family:'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  margin: 15px;
+  color: white;
+
+}
+
+.notebook-create-form {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 20px;
+  justify-content: center;
+  position: fixed;
+}
+
+.create-notebook-button {
+  width: 30px;
+  height: 30px;
+  background-size: 20px;
+  background-image: url(img/add_icon_white.svg);
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  justify-content: center;
+  outline: none;
+  margin: auto;
+}
+
+.add-notebook-input {
+  border: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 2px;
+  margin: auto;
+  margin: 20px;
+  outline: none;
+}
+
+.notebook-is-active {
+  padding: 15px;
+  width: 140px;
+  margin: auto;
+  background-color: black;
+  font-weight: bold;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}

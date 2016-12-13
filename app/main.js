@@ -1,5 +1,4 @@
 const { nativeImage, clipboard, app, Menu, Tray, dialog, BrowserWindow } = require('electron');
-
 let mainWindow = null;
 let tray = null;
 
