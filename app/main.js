@@ -17,22 +17,15 @@ app.on('ready', function() {
  mainWindow = new BrowserWindow({ title: 'JOT' });
    const menu = Menu.buildFromTemplate(template);
    Menu.setApplicationMenu(menu);
-
+// for design dev work, not to be included in production
   let trayImage = nativeImage.createFromPath('/Users/caseymetz/Turing/Mod4-projects/jot/jot_logo_png.png').resize({width: 16, height: 16});
 
+  // for design dev work, not to be included in production
   let dockImage =  nativeImage.createFromPath('/Users/caseymetz/Turing/Mod4-projects/jot/jot_logo_png.png').resize({width: 300, height: 300});
 
   app.dock.setIcon(dockImage);
 
   tray = new Tray(trayImage);
-
-  const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-  ]);
-
-  tray.setToolTip('This is my application');
-  tray.setContextMenu(contextMenu)
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.on('closed', function() {
