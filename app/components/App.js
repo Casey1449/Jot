@@ -26,7 +26,6 @@ export default class App extends React.Component {
 
   componentWillMount(){
     this.loadBookshelf();
-    console.log(db);
   }
 
   componentDidMount(){
@@ -74,6 +73,10 @@ export default class App extends React.Component {
     ipcRenderer.send('openFull');
   }
 
+  collapseFullView(){
+    ipcRenderer.send('switchToMini');
+  }
+
   destroyNote(){
     const currentNote = this.state.selectedNote;
     this.setState({ notes: this.state.notes.filter(n => n.id !==currentNote.id)});
@@ -114,6 +117,7 @@ export default class App extends React.Component {
           addNotebook = {(n) => this.addNotebook(n) }
           setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
           showFull = { () => this.showFullView() }
+          collapse = { () => this.collapseFullView() }
         />
         <NoteLog
           selectedNotebook = { this.state.selectedNotebook }

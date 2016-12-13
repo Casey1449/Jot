@@ -4,7 +4,6 @@ export default (props) => {
 
   return (
     <section className='notes-area'>
-
       <textarea
         className='note-input-text'
         value={ props.content }

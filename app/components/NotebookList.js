@@ -45,6 +45,7 @@ export default class NotebookList extends React.Component {
           </section> :
           <button className='add-notebook-button' onClick={() => this.toggleForm() }>Add Notebook</button> }
           <button onClick={ ()=>this.props.showFull() }>show full</button>
+          <button onClick={ ()=>this.props.collapse()}>collapse to mini</button>
       </section>
     )
   }
