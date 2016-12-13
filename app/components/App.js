@@ -111,17 +111,19 @@ export default class App extends React.Component {
   render(){
     return(
       <div className='main-wrapper'>
-        <NotebookList
-          notebooks = { this.state.bookShelf }
-          addNotebook = {(n) => this.addNotebook(n) }
-          setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
-        />
-        <NoteLog
-          selectedNotebook = { this.state.selectedNotebook }
-          noteContent = { this.state.noteContent }
-          notes = { this.state.notes }
-          viewNote ={ (n) => this.viewNote(n) }
-        />
+        <section className='main-notebook-options'>
+          <NotebookList
+            notebooks = { this.state.bookShelf }
+            addNotebook = {(n) => this.addNotebook(n) }
+            setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
+          />
+          <NoteLog
+            selectedNotebook = { this.state.selectedNotebook }
+            noteContent = { this.state.noteContent }
+            notes = { this.state.notes }
+            viewNote ={ (n) => this.viewNote(n) }
+          />
+        </section>
         <NotesArea saveNote={ () => this.saveNote() }
                   destroyNote={ () => this.destroyNote() }
                   setNote={ (e) => this.setNote(e) }
