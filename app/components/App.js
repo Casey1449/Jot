@@ -116,12 +116,14 @@ export default class App extends React.Component {
             notebooks = { this.state.bookShelf }
             addNotebook = {(n) => this.addNotebook(n) }
             setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
+            currentNotebook = { this.state.selectedNotebook }
           />
           <NoteLog
             selectedNotebook = { this.state.selectedNotebook }
             noteContent = { this.state.noteContent }
             notes = { this.state.notes }
             viewNote ={ (n) => this.viewNote(n) }
+            currentNote={this.state.selectedNote}
           />
         </section>
         <NotesArea saveNote={ () => this.saveNote() }

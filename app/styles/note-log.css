@@ -1,10 +1,25 @@
 .note-log-note {
   height: 50px;
   overflow: hidden;
+  text-overflow: ellipsis;
   padding: 10px;
   position: relative;
   cursor: pointer;
   border-bottom: 1px solid rgba(141, 141, 140, .5);
+  text-overflow: ellipsis;
+}
+
+.note-is-active {
+  background-color: #8D8D8D;
+  width: 140px;
+  height: 45px;
+  padding: 10px;
+  position: relative;
+  margin: auto;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .note-log-note-body {
@@ -12,6 +27,7 @@
   font-weight: 300;
   font-size: 1rem;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .note-log-note-date {
@@ -20,4 +36,6 @@
   font-size: .7rem;
   right: 0;
   position: absolute;
+  text-overflow: ellipsis;
+
 }

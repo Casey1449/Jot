@@ -8,7 +8,6 @@ export default (props) => {
 
   props.selectedNotebook !== 'all' ?
     notes = props.notes.filter(n => n.notebook === props.selectedNotebook) : notes = props.notes;
-
   return (
     <section className='note-log'>
       <ul>
@@ -16,7 +15,8 @@ export default (props) => {
         <li
           key={n.id}
           onClick={() => props.viewNote(n) }
-          className='note-log-note'>
+          className={`note-log-note ${props.currentNote && props.currentNote.id === n.id? 'note-is-active' : ''}` }
+          >
           <p className='note-log-note-body'>{ n.body }</p>
           <p className='note-log-note-date'>
             { moment(n.lastModified).format('MMM D YYYY') }
