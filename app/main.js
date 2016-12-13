@@ -14,10 +14,9 @@ let tray = null;
 const fs = require('fs');
 
 app.on('ready', function() {
- mainWindow = new BrowserWindow({ title: 'Jot' });
+ mainWindow = new BrowserWindow({ title: 'JOT' });
    const menu = Menu.buildFromTemplate(template);
    Menu.setApplicationMenu(menu);
-   mainWindow.setTitle('JOT');
 
   let trayImage = nativeImage.createFromPath('/Users/caseymetz/Turing/Mod4-projects/jot/jot_logo_png.png').resize({width: 16, height: 16});
 

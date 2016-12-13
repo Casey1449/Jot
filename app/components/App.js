@@ -44,8 +44,7 @@ export default class App extends React.Component {
 
   loadNotes(){
     this.setState({ notes: [] });
-    db.createValueStream()
-    .on('data', (data) => {
+    db.createValueStream().on('data', (data) => {
       if(!Array.isArray(data)){
         this.setState({ notes: this.state.notes.concat(data) });
       }

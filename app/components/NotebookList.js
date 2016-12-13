@@ -2,6 +2,7 @@ import React from 'react';
 import shortid from 'shortid';
 
 export default class NotebookList extends React.Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -10,13 +11,13 @@ export default class NotebookList extends React.Component {
     };
   }
 
-  toggleForm() {
+  toggleForm(){
     this.setState({ formShowing: !this.state.formShowing });
     this.setState({ notebookName: '' });
   }
 
 
-  add() {
+  add(){
     this.props.addNotebook(this.state.notebookName);
     this.toggleForm()
   }
@@ -46,11 +47,7 @@ export default class NotebookList extends React.Component {
               placeholder='add notebook' />
             <button
               className='create-notebook-button'
-              onClick={ () => {
-                this.props.addNotebook(this.state.notebookName);
-                this.toggleForm();
-                }
-              }
+              onClick={ () => add() }
             ></button>
           </section> :
           <section className='notebook-create-form'>
