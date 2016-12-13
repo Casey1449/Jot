@@ -1,10 +1,9 @@
-const { nativeImage, clipboard, app, Menu, Tray, BrowserWindow } = require('electron');
-
-
+const { nativeImage, clipboard, app, Menu, Tray, dialog, BrowserWindow } = require('electron');
 
 let mainWindow = null;
 let tray = null;
 
+const fs = require('fs');
 
 app.on('ready', function() {
  mainWindow = new BrowserWindow({ title: 'Jot' });
@@ -34,6 +33,20 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
    mainWindow = null;
   });
+
+
+  const saveLocal = app.saveLocal = (win, content) => {
+    const file = dialog.showSaveDialog(win, {
+      title: 'Save File',
+      defaultPath: app.getPath('desktop'),
+      buttonLabel: 'Save your note 🗒',
+      filters: [
+        {name: 'All Files', extensions: ['*']}
+      ]
+    });
+    if (!file) { return; }
+    fs.writeFileSync(file, content);
+  };
 });
 
 const template = [

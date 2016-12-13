@@ -21,6 +21,7 @@ export default (props) => {
           onClick={ props.startNewNote }>
           Add new note
         </button>
+        <button onClick={ props.saveLocal }>Save Local</button>
     </section>
   )
 }

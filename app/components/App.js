@@ -4,7 +4,13 @@ import NotebookList from './NotebookList';
 import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
 
-const [ Note, db ] = require('../db');
+const { Note, devDB, testDB } = require('../db');
+
+let db = devDB;
+
+if (process.env.NODE_ENV === 'test') {
+  db = testDB;
+}
 
 export default class App extends React.Component {
   constructor(){
@@ -95,6 +101,13 @@ export default class App extends React.Component {
     this.startNewNote();
   }
 
+  saveLocal() {
+    const { remote } = require('electron');
+    const mainProcess = remote.app;
+    const currentWindow = remote.getCurrentWindow();
+    mainProcess.saveLocal(currentWindow, this.state.noteContent);
+  }
+
   render(){
     return(
       <div className='main-wrapper'>
@@ -113,7 +126,9 @@ export default class App extends React.Component {
                   destroyNote={ () => this.destroyNote() }
                   setNote={ (e) => this.setNote(e) }
                   content={ this.state.noteContent }
-                  startNewNote = { () => this.startNewNote() }/>
+                  startNewNote = { () => this.startNewNote() }
+                  saveLocal = { () => this.saveLocal() }
+        />
       </div>
     );
   }
