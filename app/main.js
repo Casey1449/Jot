@@ -1,16 +1,34 @@
-const { nativeImage, clipboard, app, Menu, Tray, BrowserWindow } = require('electron');
+const { nativeImage, clipboard, app, Menu, Tray, BrowserWindow, ipcMain } = require('electron');
 const menubar = require('menubar');
-const mb = menubar();
+const miniWindow = menubar({width: 600, height: 300, windowPosition: 'topRight', alwaysOnTop: true});
 
-let mainWindow = null;
-let tray = null;
+let fullWindow = null;
 
-mb.on('ready', function ready(){
+// const openFullWindow = exports.openFullWindow = function(win){
+//   win.loadURL(`file://${__dirname}/index.html`)
+//   win.once('ready-to-show', () => {
+//     win.show();
+//   });
+// }
+
+miniWindow.on('ready', function ready(){
   console.log('Application is ready.');
+
 });
 
-mb.on('after-create-window', function (){
-  mb.window.loadURL(`file://${__dirname}/index.html`)
+miniWindow.on('after-create-window', function (){
+  miniWindow.window.loadURL(`file://${__dirname}/index.html`)
+
+});
+
+ipcMain.on('openFull', () => {
+  fullWindow = new BrowserWindow({
+    show: false
+  })
+  fullWindow.loadURL(`file://${__dirname}/index.html`)
+  fullWindow.once('ready-to-show', () => {
+    fullWindow.show();
+  });
 })
 
 

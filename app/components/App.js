@@ -3,7 +3,7 @@ import React from 'react';
 import NotebookList from './NotebookList';
 import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
-
+const { ipcRenderer } = require('electron')
 const { Note, devDB, testDB } = require('../db');
 //
 let db = devDB;
@@ -26,6 +26,7 @@ export default class App extends React.Component {
 
   componentWillMount(){
     this.loadBookshelf();
+    console.log(db);
   }
 
   componentDidMount(){
@@ -69,6 +70,10 @@ export default class App extends React.Component {
     }
   }
 
+  showFullView(){
+    ipcRenderer.send('openFull');
+  }
+
   destroyNote(){
     const currentNote = this.state.selectedNote;
     this.setState({ notes: this.state.notes.filter(n => n.id !==currentNote.id)});
@@ -108,6 +113,7 @@ export default class App extends React.Component {
           notebooks = { this.state.bookShelf }
           addNotebook = {(n) => this.addNotebook(n) }
           setCurrentNotebook = {(e) => this.setCurrentNotebook(e)}
+          showFull = { () => this.showFullView() }
         />
         <NoteLog
           selectedNotebook = { this.state.selectedNotebook }
