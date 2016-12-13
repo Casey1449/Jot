@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default (props) => {
-
   return (
     <section className='notes-area'>
       <span className='watermark-logo'></span>

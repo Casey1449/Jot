@@ -1,6 +1,5 @@
 import React from 'react';
-
-const moment = require('moment');
+import moment from 'moment';
 
 export default (props) => {
   let notes = [];
