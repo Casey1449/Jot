@@ -15,7 +15,15 @@ export default class NotebookList extends React.Component {
     this.setState({ notebookName: '' });
   }
 
+
+  add() {
+    this.props.addNotebook(this.state.notebookName);
+    this.toggleForm()
+  }
+
   updateNotebookName(e){
+    e.which = e.which || e.keyCode;
+    e.which === 13 ? this.add() :
     this.setState({ notebookName: e.target.value });
   }
 
