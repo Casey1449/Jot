@@ -5,7 +5,7 @@ import NoteLog from './NoteLog';
 import NotesArea from './NotesArea';
 
 const { Note, devDB, testDB } = require('../db');
-//
+
 let db = devDB;
 
 if (process.env.NODE_ENV === 'test') {
