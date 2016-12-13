@@ -1,0 +1,18 @@
+.notebook-list-notebook {
+  height: 50px;
+  overflow: hidden;
+  padding: 10px;
+  padding-left: 20px;
+  position: relative;
+  border-bottom: 1px solid rgba(141, 141, 140, .5);
+  font-family:'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+h1 {
+  font-family:'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 1.2rem;
+  margin: 15px;
+}

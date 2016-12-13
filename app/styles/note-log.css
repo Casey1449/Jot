@@ -1,0 +1,21 @@
+.note-log-note {
+  height: 50px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  border-bottom: 1px solid rgba(141, 141, 140, .5);
+}
+
+.note-log-note-body {
+  font-family:'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.note-log-note-date {
+  font-family:'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: .7rem;
+  right: 0;
+  position: absolute;
+}
