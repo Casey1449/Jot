@@ -1,7 +1,16 @@
-const { nativeImage, clipboard, app, Menu, Tray, dialog, BrowserWindow } = require('electron');
+const {
+  nativeImage,
+  clipboard,
+  app,
+  Menu,
+  Tray,
+  dialog,
+  BrowserWindow
+} = require('electron');
+
+const template = require('./helpers/menu-bar-template');
 let mainWindow = null;
 let tray = null;
-
 const fs = require('fs');
 
 app.on('ready', function() {
@@ -21,18 +30,15 @@ app.on('ready', function() {
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Item1', type: 'radio'},
     {label: 'Item2', type: 'radio'},
-  ])
+  ]);
 
   tray.setToolTip('This is my application');
   tray.setContextMenu(contextMenu)
-  mainWindow = new BrowserWindow({
-   });
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.on('closed', function() {
    mainWindow = null;
   });
-
 
   const saveLocal = app.saveLocal = (win, content) => {
     const file = dialog.showSaveDialog(win, {
@@ -47,90 +53,6 @@ app.on('ready', function() {
     fs.writeFileSync(file, content);
   };
 });
-
-const template = [
-  {
-    label: 'Edit',
-    submenu: [
-      {
-        role: 'undo'
-      },
-      {
-        role: 'redo'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'cut'
-      },
-      {
-        role: 'copy'
-      },
-      {
-        role: 'paste'
-      },
-      {
-        role: 'pasteandmatchstyle'
-      },
-      {
-        role: 'delete'
-      },
-      {
-        role: 'selectall'
-      }
-    ]
-  },
-  {
-    label: 'View',
-    submenu: [
-      {
-        role: 'reload'
-      },
-      {
-        role: 'toggledevtools'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'resetzoom'
-      },
-      {
-        role: 'zoomin'
-      },
-      {
-        role: 'zoomout'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'togglefullscreen'
-      }
-    ]
-  },
-  {
-    role: 'window',
-    submenu: [
-      {
-        role: 'minimize'
-      },
-      {
-        role: 'close'
-      }
-    ]
-  },
-  {
-    role: 'help',
-    submenu: [
-      {
-        label: 'Learn More',
-        click () { require('electron').shell.openExternal('http://electron.atom.io') }
-      }
-    ]
-  }
-];
 
 if (process.platform === 'darwin') {
   template.unshift({
@@ -166,7 +88,6 @@ if (process.platform === 'darwin') {
       }
     ]
   });
-  // Edit menu.
   template[1].submenu.push(
     {
       type: 'separator'
@@ -183,7 +104,6 @@ if (process.platform === 'darwin') {
       ]
     }
   );
-  // Window menu.
   template[3].submenu = [
     {
       label: 'Close',
