@@ -6,6 +6,7 @@ textarea {
   padding-top: 80px;
   font-size: 1rem;
   border: none;
+  outline: none;
 }
 
 
@@ -23,8 +24,9 @@ textarea {
   width: 30px;
   background-image: url(img/delete_note_button.svg);
   background-position: left top;
-  background-color: white;
+  background-color: transparent;
   border: none;
+  outline: none;
 }
 
 .delete-note-button:hover {
@@ -36,8 +38,9 @@ textarea {
   height: 30px;
   background-image: url(img/new_note_button.svg);
   background-position: left top;
-  background-color: white;
+  background-color: transparent;
   border: none;
+  outline: none;
 }
 
 .new-note-button:hover {
@@ -51,8 +54,10 @@ textarea {
   margin-top: 20px;
   background-image: url(img/save_local_icon.svg);
   background-position: left top;
-  background-color: white;
+  background-color: transparent;
   border: none;
+  outline: none;
+
 }
 
 .save-local-button:hover {

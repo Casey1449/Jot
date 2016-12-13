@@ -16,6 +16,7 @@ body {
   position: relative;
   background-color: rgba(141, 141, 140, .8);
   overflow-y: scroll;
+  padding-bottom: 70px;
 }
 
 .note-log {
