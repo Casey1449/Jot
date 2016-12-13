@@ -27,12 +27,18 @@ export default class NotebookList extends React.Component {
         { this.props.notebooks ? this.props.notebooks.map(n => <li
           key={shortid.generate()}
           onClick={(e) => this.props.setCurrentNotebook(e)}
+
+
+
+          className={`notebook-list-notebook ${this.props.currentNotebook && this.props.currentNotebook === n? 'notebook-is-active' : ''}` }
           >{n}</li>) : 'no notebooks' }
         </ul>
+
         { this.state.formShowing ?
-          <section>
+          <section className='notebook-create-form'>
             <input
               onKeyUp={(e) => this.updateNotebookName(e) }
+              className='add-notebook-input'
               placeholder='add notebook' />
             <button
               className='create-notebook-button'
@@ -41,9 +47,12 @@ export default class NotebookList extends React.Component {
                 this.toggleForm();
                 }
               }
-            >Create Notebook</button>
+            ></button>
           </section> :
-          <button className='add-notebook-button' onClick={() => this.toggleForm() }>Add Notebook</button> }
+          <section className='notebook-create-form'>
+
+            <button className='create-notebook-button' onClick={() => this.toggleForm() }></button>
+          </section>}
       </section>
     )
   }
