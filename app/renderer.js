@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App'
+import App from './components/App';
 
 
 const {remote} = require('electron');
@@ -36,11 +36,6 @@ menu.append(new MenuItem({label: 'JOT', submenu: [
     role: 'selectall'
   }
 ]}));
-
-menu.append(new MenuItem({label: 'New Note', click() { console.log('New note') }}));
-menu.append(new MenuItem({label: 'New Notebook', click() {
-  console.log('add notebook');
-}}));
 
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();
